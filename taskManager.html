@@ -3,17 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/taskManeger.css">
     <title>Task Manager</title>
   </head>
   <body>
 
-    <main>
+    <main class="main">
       <button id="button_theme">Theme</button>
       <div id="task-manager">
         <h1>My Task Manager</h1>
         <form id="task-form">
           <input type="text" placeholder="Enter a new task" id="task-input"
-            required>
+            required name="input">
           <button type="submit">Add Task</button>
         </form>
         <ul id="task-list">
