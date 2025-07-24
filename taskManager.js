@@ -2,10 +2,11 @@ const buttonTheme = document.getElementById("button_theme");
 const taskForm = document.getElementById("task-form");
 const taskList = document.getElementById("task-list");
 const taskInput = taskForm.elements["input"];
+const currentTheme = localStorage.getItem("theme");
 loadTask()
 
 
-// función para formulario
+// function form
 
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -16,17 +17,19 @@ taskForm.addEventListener("submit", (event) => {
     saveLocalStorage(task)
     taskInput.value = "";
   }
-
 })
 
+// function create task
+
 function createElementTask(task) {
-  const lista = document.createElement("li");
-  lista.textContent = task;
-  lista.append(createButtons("✖️", "delete-btn"));
-  lista.append(createButtons("✍️", "edit-btn"));
-  return lista
+  const list = document.createElement("li");
+  list.textContent = task;
+  list.append(createButtons("✖️", "delete-btn"));
+  list.append(createButtons("✍️", "edit-btn"));
+  return list
 }
 
+// function create buttons for edit or delete
 
 function createButtons(text, className) {
   const btn = document.createElement("span");
@@ -35,34 +38,34 @@ function createButtons(text, className) {
   return btn
 }
 
-// Se utiliza la delegación padre (ul) para capturar el evento segun el click al cualquier elemento hijo
+// This function used the parent delegation (ul) for capture the event according to the click on any child element.
 
 taskList.addEventListener("click", (event) => {
-  console.log(event.target)
-  // aseguranos que este elemento contenga una clase
-  // con event.target ya podemos saber cual elemento se clickeo
+  // Make sure this element contains a class
+  // With event.target we can already know which element was clicked.
   if (event.target.classList.contains("delete-btn")) {
     deleteTask(event.target.parentElement)
   } else if (event.target.classList.contains("edit-btn")) {
     editTask(event.target.parentElement);
   }
-
 })
 
 function deleteTask(taskItem) {
-  if (confirm("¿Estás seguro de eliminar esta tarea?")) {
+  if (confirm("¿Estás seguro de eliminar esta tarea? 🤨")) {
     taskItem.remove();
+    updateLocalStorage();
   }
 }
 
 function editTask(taskItem) {
-  const newEditTask = prompt("Edita la tarea: " + taskItem.firstChild.textContent);
+  const newEditTask = prompt("Edita la tarea: " + taskItem.firstChild.textContent + "🖊️");
   if (newEditTask !== null) {
     taskItem.firstChild.textContent = newEditTask;
+    updateLocalStorage();
   }
 }
 
-// usando webApi de localstorage
+// Using localStorage webApi
 
 function saveLocalStorage(task) {
   const taskStorage = JSON.parse(localStorage.getItem("task") || "[]");
@@ -70,17 +73,32 @@ function saveLocalStorage(task) {
   localStorage.setItem("task", JSON.stringify(taskStorage));
 }
 
-// con la siguiente funcion se indica al navegador que lea los datos guardados en el localstorage para poderlos inyectar
+// The browser is instructed to read the data stored in the localstorage in order to be able to inject them
 
 function loadTask() {
   const tasks = JSON.parse(localStorage.getItem("task") || "[]");
-
   tasks.forEach((task) => {
     taskList.appendChild(createElementTask(task))
   })
 }
 
 
-buttonTheme.addEventListener("click", (e) => {
-  const classBackground = e.target.classList.toggle("dark");
+// For function to show the last saved changes when refreshing the page.
+
+function updateLocalStorage() {
+  // Capture the current status of the tasks
+  // It's converted to array with Array.from and with map we get the texts
+  const taskUpdate = Array.from(taskList.querySelectorAll("li")).map((li) => li.firstChild.textContent); //  Brings all tasks created from this container
+  localStorage.setItem("task", JSON.stringify(taskUpdate))
+}
+
+
+buttonTheme.addEventListener("click", () => {
+  document.body.classList.toggle("dark"); // adds a class to the body tag
+  const theme = document.body.classList.contains("dark") ? "dark" : "light";
+  localStorage.setItem("theme", theme);
 })
+
+if (currentTheme === "dark") {
+  document.body.classList.add("dark");
+}
