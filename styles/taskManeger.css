@@ -1,11 +1,139 @@
 .main {
-  background-color: #FFEFE7;
+  background-color: transparent;
+  margin: 0 auto;
+  width: 70%;
+  border: 1px solid rgb(27, 15, 15);
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 0 20px 15px rgba(0, 0, 0, 0.3);
+}
+
+#task-manager {
+  color: rgb(204, 202, 101);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#task-manager>h1 {
+  font-family: "DynaPuff", system-ui;
+}
+
+#task-list {
+  font-family: "Stardos Stencil", system-ui;
+  width: 80%;
+  padding: 0;
+}
+
+#task-form {
+  width: 80%;
+}
+
+#task-form>button {
+  border: none;
+  height: 38px;
+  width: 200px;
+  margin-top: 20px;
+  background-color: rgb(2, 156, 79);
+  color: aliceblue;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#task-form>button:hover {
+  background-color: #df8013;
+}
+
+#task-input {
+  width: 100%;
+  height: 38px;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid wheat;
+  border-radius: 10px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 0 20px 15px rgba(0, 0, 0, 0.3);
+  color: rgb(250, 250, 250);
+  padding: 8px;
+  font-size: 15px;
+}
+
+#task-list>li {
+  width: 100%;
+  list-style: none;
+  border: 1px solid wheat;
+  border-radius: 10px;
+  margin: 15px 0px 15px 0px;
+  color: #df8013;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 10px 20px 30px;
+}
+
+.delete-btn {
+  margin-left: 30px;
+  margin-right: 20px;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  cursor: pointer;
 }
 
 .dark {
-  background: radial-gradient(circle at 50% 80%, rgba(168, 85, 247, 0.3), transparent 60%), #000000;
+  background: radial-gradient(circle at 50% 80%,
+      rgba(168, 85, 247, 0.3) 0%,
+      rgba(0, 0, 0, 0.9) 80%),
+    #000000;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#button_theme {
+  border: none;
+  height: 38px;
+  width: 200px;
+  margin-top: 20px;
+  background-color: rgb(107, 16, 107);
+  color: aliceblue;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .light {
-  background-color: rgb(175, 127, 63);
+  background-color: rgb(23, 54, 14);
+
+  background: radial-gradient(circle at 50% 80%,
+      rgba(19, 22, 19, 0.3) 0%,
+      rgba(7, 99, 91, 0.9) 80%),
+    #000000;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@media (max-width:600px) {
+  #task-list>li {
+    padding: 2px 5px 2px 5px;
+  }
+
+  #button_theme {
+    margin-bottom: 20px;
+    height: 28px;
+    width: 100px;
+  }
+
+  #task-manager>h1 {
+    text-align: center;
+  }
+
 }

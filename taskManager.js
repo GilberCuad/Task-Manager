@@ -3,6 +3,7 @@ const taskForm = document.getElementById("task-form");
 const taskList = document.getElementById("task-list");
 const taskInput = taskForm.elements["input"];
 const currentTheme = localStorage.getItem("theme");
+const darkTheme = document.body.classList.toggle("dark");
 loadTask()
 
 
@@ -24,8 +25,10 @@ taskForm.addEventListener("submit", (event) => {
 function createElementTask(task) {
   const list = document.createElement("li");
   list.textContent = task;
+
   list.append(createButtons("✖️", "delete-btn"));
   list.append(createButtons("✍️", "edit-btn"));
+
   return list
 }
 
@@ -94,8 +97,9 @@ function updateLocalStorage() {
 
 
 buttonTheme.addEventListener("click", () => {
-  document.body.classList.toggle("dark"); // adds a class to the body tag
-  const theme = document.body.classList.contains("dark") ? "dark" : "light";
+  // adds a class to the body tag
+  const lightTheme = document.body.classList.toggle("light");
+  const theme = document.body.classList.contains(darkTheme) ? darkTheme : lightTheme;
   localStorage.setItem("theme", theme);
 })
 
