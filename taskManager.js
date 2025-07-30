@@ -97,12 +97,22 @@ function updateLocalStorage() {
 
 
 buttonTheme.addEventListener("click", () => {
-  // adds a class to the body tag
   const lightTheme = document.body.classList.toggle("light");
   const theme = document.body.classList.contains(darkTheme) ? darkTheme : lightTheme;
+
+  if (buttonTheme.textContent.includes("Theme 🌞")) {
+    buttonTheme.textContent = "Theme 🌃"
+    localStorage.setItem("theme", "dark")
+  } else {
+    buttonTheme.textContent = "Theme 🌞";
+    localStorage.setItem("theme", "light")
+  }
+
   localStorage.setItem("theme", theme);
+
 })
 
 if (currentTheme === "dark") {
   document.body.classList.add("dark");
 }
+
